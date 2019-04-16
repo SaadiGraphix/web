@@ -3,7 +3,7 @@ html, body {
   padding: 0;
 }
 body{
-  background-color: lightblue;
+  background-color: #f2f4f7;
 }
 canvas {
   display: block;
