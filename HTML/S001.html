@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>S02 | A Project By Saadi GFX</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"/></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"/></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"/></script>
+		<style>
+			html, body {
+				margin: 0;
+				padding: 0;
+				background-color: #ebebeb;
+			}
+			canvas {
+				display: block;
+			}
+			div.fixed{
+				position: fixed;
+				left: 0px;
+				top: 500px;
+				background-color: #a8a8a8;
+				color: #343534;
+				margin: 0px;
+				width: 750px;
+				height: 30px;
+				font-family: sans-serif;
+				font-size: 15px;
+			}
+			#ab:hover{
+				color: #121212;
+			}
+			#ab{
+				margin-left: 7px;
+				margin-top: 7px;
+				margin-bottom: 7px;
+				margin-right: 7px;
+			}
+			#links:hover{
+				background-color: #101010;
+			}
+			#links{
+				position: fixed;
+				left: 0px;
+				top: 530px;
+				margin: 0px;
+				width: 750px;
+				height: auto;
+				background-color: #191919;
+				text-align: center;
+				padding-top: 3px;
+				padding-bottom: 3px;
+			}
+			a{
+				text-decoration: none;
+				font-family: sans-serif;
+				font-size: 15px;
+				padding: 5px;
+			}
+			a:link{
+				color: #585858;
+			}
+			a:visited{
+				color: #009698;
+			}
+			a:active{
+				color: #ff2400;
+			}
+			a:hover{
+				color: #141414;
+			}
+		</style>
+	</head>
+	<!-- from here body starts -->
+	<body>
+		<div class="can">
+			<script>
+				function setup() {
+					createCanvas(750, 500);
+				}
+
+				function draw() {
+					var r = map(mouseX,0,750,0,255);
+					background(r,0,0);
+					noFill();
+					strokeWeight(5);
+					stroke(255);
+					rectMode(CENTER);
+					rect(mouseX,250,100,100);
+				}
+			</script>
+		</div>
+
+		<div class="fixed">
+			<p id="ab">Drag your mouse on canvas, from left to right.</p>
+		</div>
+
+		<div id="links">
+			<a class="fblink" href="https://fb.com/SaadiGFX">Facebook</a>
+			<a class="fblink" href="https://instagram.com/SaadiGFX">Instagram</a>
+			<a class="fblink" href="https://twitter.com/SaadiGFX">Twitter</a>
+		</div>
+	</body>
+</html>
