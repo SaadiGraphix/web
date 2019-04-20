@@ -86,6 +86,9 @@
 					strokeWeight(5);
 					stroke(255);
 					rectMode(CENTER);
+					if(mouseX>width){
+						noStroke();
+					}
 					rect(mouseX,250,100,100);
 				}
 			</script>
