@@ -1,0 +1,147 @@
+<!-- I used this image as a reference
+Source: https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.ytimg.com%2Fvi%2FuJWK7NeGOmI%2Fmaxresdefault.jpg&imgrefurl=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DuJWK7NeGOmI&docid=D5jr3AclRTKnUM&tbnid=46Fn6IYwrMOvuM%3A&vet=10ahUKEwiOn73Vp97hAhUKURUIHZr5DA8QMwhlKBswGw..i&w=1280&h=720&bih=625&biw=1366&q=geometric%20drawing&ved=0ahUKEwiOn73Vp97hAhUKURUIHZr5DA8QMwhlKBswGw&iact=mrc&uact=8 -->
+
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>S006 | Saadi GFX</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"/></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"/></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"/></script>
+		<style>
+			html, body {
+				margin: 0;
+				padding: 0;
+				background-color: #ebebeb;
+			}
+			canvas {
+				display: block;
+			}
+			div.fixed{
+				position: fixed;
+				left: 600px;
+				top: 0px;
+				background-color: #a8a8a8;
+				color: #343534;
+				margin: 0px;
+				width: 450px;
+				height: auto;
+				font-family: sans-serif;
+				font-size: 15px;
+				text-align: justify;
+			}
+			#ab:hover{
+				color: #121212;
+			}
+			#ab{
+				margin-left: 7px;
+				margin-top: 7px;
+				margin-bottom: 7px;
+				margin-right: 7px;
+			}
+			#links:hover{
+				background-color: #101010;
+			}
+			#links{
+				position: fixed;
+				left: 0px;
+				top: 600px;
+				margin: 0px;
+				width: 600px;
+				height: auto;
+				background-color: #191919;
+				text-align: center;
+				padding-top: 3px;
+				padding-bottom: 3px;
+			}
+			a{
+				text-decoration: none;
+				font-family: sans-serif;
+				font-size: 15px;
+				padding: 10px;
+			}
+			a:link{
+				color: #585858;
+			}
+			a:visited{
+				color: #009698;
+			}
+			a:active{
+				color: #ff2400;
+			}
+			a:hover{
+				color: #ebebeb;
+			}
+		</style>
+	</head>
+	<!-- from here body starts -->
+	<body>
+		<div class="can">
+			<script>
+				function setup() {
+				  createCanvas(600, 600);
+				  background(50);
+				}
+
+
+				function draw() {
+				  // i removed the stroke because for this particular drawing, i don't want that to be used...
+				  noStroke();
+				  // this is the left side of the graphic
+				  fill(225); // top left side square
+				  quad(100, 200, 200, 100, 300, 200, 200, 300);
+				  fill(175); // most left side square
+				  quad(100, 200, 100, 300, 200, 400, 200, 300);
+				  fill(200); // left side middle square
+				  quad(200, 300, 200, 400, 300, 300, 300, 200);
+				  fill(150); // bottom left triangle
+				  quad(200, 400, 300, 500, 300, 400, 300, 300);
+
+				  // this is the right side of the graphic
+				  fill(215); // top right side square
+				  quad(300, 200, 400, 100, 500, 200, 400, 300);
+				  fill(165); // most right square
+				  quad(500, 200, 500, 300, 400, 400, 400, 300);
+				  fill(190); // right side middle square
+				  quad(300, 200, 300, 300, 400, 400, 400, 300);
+				  fill(140); // bottom right triangle
+				  quad(300, 300, 300, 400, 300, 500, 400, 400);
+				  
+				  // my signature xD
+				  strokeWeight(5);
+				  stroke(75);
+				  line(595,595,595,570);
+				  line(595,595,580,595);
+				  line(580,595,580,570);
+				  line(580,595,565,595);
+				  line(565,595,565,570);
+				  line(565,595,550,595);
+				  line(550,595,550,570);
+				  line(550,570,540,570);
+				  line(540,570,540,595);
+				  line(550,595,530,595);
+				  line(525,595,525,570);
+				  line(525,595,515,595);
+				  line(525,570,515,570);
+				  line(495,570,505,570);
+				  line(495,570,495,580);
+				  line(495,580,505,580);
+				  line(505,580,505,595);
+				  line(505,595,485,595);
+				  line(480,595,480,570);
+				}
+			</script>
+		</div>
+
+		<div class="fixed">
+			<p id="ab">This is a HEART. I used quad() & line() functions from 2D drawing basic. HEART itself has no stroke because i used noStroke() function to remove its stroke. But, for my signature at the right-bottom, I used stroke() function along with strokeWeight() function to modify the line parameters for the signature. Size for this canvas is 600px by 600px.s</p>
+		</div>
+
+		<div id="links">
+			<a class="fblink" href="https://saadigfx.github.io/web/">Back to home</a>
+			<a class="fblink" href="https://fb.com/SaadiGFX">Facebook</a>
+			<a class="fblink" href="https://instagram.com/SaadiGFX">Instagram</a>
+			<a class="fblink" href="https://twitter.com/SaadiGFX">Twitter</a>
+		</div>
+	</body>
+</html>
