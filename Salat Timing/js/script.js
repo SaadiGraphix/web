@@ -24,7 +24,7 @@ $(document).ready(function(){
 
     // funtion to check timing using lon & lat
     function timing(lat,lon) {
-      var api_source = 'http://api.aladhan.com/v1/calendar?';
+      var api_source = 'https://api.aladhan.com/v1/calendar?';
       var api_lat = 'latitude=';
       var api_lon = '&longitude=';
       var qurey = '/monthly/26-04-2019.json';
