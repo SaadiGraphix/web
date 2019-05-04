@@ -1,28 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <title>Salat Timing | اوقاتِ صلوۃ</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      @media screen and (max-width:786px) {
+        :root {
+          --mob_menu_toggler_background_color: red;
+          --mob_menu_toggler_bars_color: green;
+          --mob_menu_background_color: black;
+          --mob_menu_color: blue;
+          --mob_menu_transition_duration: 0.5s;
+          --mob_menu_font_size: 1.5rem;
+          --mob_menu_padding: 1rem;
+          --mob_menu_font_family: sans-serif;
+          --mob_menu_font_weight: normal;
+        }
+        .mob_menu_wrapper{
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
+        .mob_menu_wrapper .mob_menu_toggler{
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          cursor: pointer;
+          width: 50px;
+          height: 50px;
+          opacity: 0;
+        }
+        .mob_menu_wrapper .mob_menu_toggler_bars{
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          width: 60px;
+          height: 60px;
+          padding: 1rem;
+          background-color: var(--mob_menu_toggler_background_color);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .mob_menu_wrapper .mob_menu_toggler_bars > div{
+          flex: none;
+          position: relative;
+          width: 100%;
+          height: 2px;
+          background-color: var(--mob_menu_toggler_bars_color);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: all var(--mob_menu_transition_duration) ease;
+        }
+        .mob_menu_wrapper .mob_menu_toggler_bars > div::before,
+        .mob_menu_wrapper .mob_menu_toggler_bars > div::after{
+          content: '';
+          position: absolute;
+          z-index: 1;
+          top: -10px;
+          width: 100%;
+          height: 2px;
+          background-color: inherit;
+        }
+        .mob_menu_wrapper .mob_menu_toggler_bars > div::after{
+          top: 10px;
+        }
+        .mob_menu_wrapper .mob_menu_toggler:checked + .mob_menu_toggler_bars > div{
+          transform: rotate(135deg);
+        }
+        .mob_menu_wrapper .mob_menu_toggler:checked + .mob_menu_toggler_bars > div::before,
+        .mob_menu_wrapper .mob_menu_toggler:checked + .mob_menu_toggler_bars > div::after{
+          top: 0;
+          transform: rotate(90deg);
+        }
+        .mob_menu_wrapper .mob_menu_toggler:checked:hover + .mob_menu_toggler_bars > div{
+          transform: rotate(90deg);
+        }
+        .mob_menu_wrapper .mob_menu_toggler:checked ~ .mob_menu {
+          visibility: visible;
+        }
+
+        .mob_menu_wrapper .mob_menu_toggler:checked ~ .mob_menu > div {
+          transform: scale(1);
+          transition: all var(--mob_menu_transition_duration) ease;
+        }
+
+        .mob_menu_wrapper .mob_menu_toggler:checked ~ .mob_menu > div > div {
+          opacity: 1;
+          transition:  opacity var(--mob_menu_transition_duration) ease;
+        }
+        .mob_menu_wrapper .mob_menu {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .mob_menu_wrapper .mob_menu > div{
+          background: var(--mob_menu_background_color);
+          border-radius: 50%;
+          width: 200vw;
+          height: 200vw;
+          display: flex;
+          flex: none;
+          align-items: center;
+          justify-content: center;
+          transform: scale(0);
+        }
+        .mob_menu_wrapper .mob_menu div > div {
+          text-align: center;
+          max-width: 90vw;
+          max-height: 100vh;
+          opacity: 0;
+        }
+        .mob_menu_wrapper .mob_menu > div > div > ul > li {
+          list-style: none;
+          color: var(--mob_menu_color);
+          font-size: var(--mob_menu_font_size);
+          padding: var(--mob_menu_padding);
+        }
+        .mob_menu_wrapper .mob_menu > div > div > ul > li > a {
+          color: inherit;
+          text-decoration: none;
+          font-family: var(--mob_menu_font_family);
+          font-weight: var(--mob_menu_font_weight);
+          transition: color var(--mob_menu_transition_duration) ease;
+        }
+      }
+      @media screen and (min-width:787px) {
+        .mob_menu_wrapper{
+          display: none;
+        }
+      }
+
+    </style>
   </head>
   <body>
-    <div class="nav_menu">
-        
-      <nav class="navigation">
-        <ul class="nav_nav">
-          <li class="nav_items"><a class="nav_links" id="logo">The Salat</a></li>
-          <li class="nav_items"><a href="#" class="nav_links">Prayer Timing</a></li>
-          <li class="nav_items"><a href="#" class="nav_links">Ramadan 2019</a></li>
-          <li class="nav_items"><a href="#" class="nav_links">Dua&apos;s</a></li>
-        </ul>
-        <form class="search_form">
-          <input type="search" class="search_bar" placeholder="Search">
-          <button class="search_button"><i class="fas fa-search"></i></button>
-        </form>
-      </nav>
-    </div>
+    <header>
+      <div class="mob_menu_wrapper">
+        <input type="checkbox" class="mob_menu_toggler">
+        <div class="mob_menu_toggler_bars">
+          <div></div>
+        </div>
+        <div class="mob_menu">
+          <div>
+            <div>
+              <ul>
+                <li>
+                  <a href="#">Prayer Timings</a>
+                </li>
+                <li>
+                  <a href="#">Daily Dua&apos;s</a>
+                </li>
+                <li>
+                  <a href="#">Al Quran</a>
+                </li>
+                <li>
+                  <a href="#">Hadith</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
   </body>
 </html>
