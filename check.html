@@ -3,175 +3,712 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Salat</title>
+    <!-- Required CSS Files For Proper Functionality -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat700,800,900|Open+Sans|Roboto:900|Oswald:700">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <style>
-      @media screen and (max-width:786px) {
-        :root {
-          --mob_menu_toggler_background_color: red;
-          --mob_menu_toggler_bars_color: green;
-          --mob_menu_background_color: black;
-          --mob_menu_color: blue;
-          --mob_menu_transition_duration: 0.5s;
-          --mob_menu_font_size: 1.5rem;
-          --mob_menu_padding: 1rem;
-          --mob_menu_font_family: sans-serif;
-          --mob_menu_font_weight: normal;
-        }
-        .mob_menu_wrapper{
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 1;
-        }
-        .mob_menu_wrapper .mob_menu_toggler{
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 2;
-          cursor: pointer;
-          width: 50px;
-          height: 50px;
-          opacity: 0;
-        }
-        .mob_menu_wrapper .mob_menu_toggler_bars{
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 1;
-          width: 60px;
-          height: 60px;
-          padding: 1rem;
-          background-color: var(--mob_menu_toggler_background_color);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .mob_menu_wrapper .mob_menu_toggler_bars > div{
-          flex: none;
-          position: relative;
-          width: 100%;
-          height: 2px;
-          background-color: var(--mob_menu_toggler_bars_color);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          transition: all var(--mob_menu_transition_duration) ease;
-        }
-        .mob_menu_wrapper .mob_menu_toggler_bars > div::before,
-        .mob_menu_wrapper .mob_menu_toggler_bars > div::after{
-          content: '';
-          position: absolute;
-          z-index: 1;
-          top: -10px;
-          width: 100%;
-          height: 2px;
-          background-color: inherit;
-        }
-        .mob_menu_wrapper .mob_menu_toggler_bars > div::after{
-          top: 10px;
-        }
-        .mob_menu_wrapper .mob_menu_toggler:checked + .mob_menu_toggler_bars > div{
-          transform: rotate(135deg);
-        }
-        .mob_menu_wrapper .mob_menu_toggler:checked + .mob_menu_toggler_bars > div::before,
-        .mob_menu_wrapper .mob_menu_toggler:checked + .mob_menu_toggler_bars > div::after{
-          top: 0;
-          transform: rotate(90deg);
-        }
-        .mob_menu_wrapper .mob_menu_toggler:checked:hover + .mob_menu_toggler_bars > div{
-          transform: rotate(90deg);
-        }
-        .mob_menu_wrapper .mob_menu_toggler:checked ~ .mob_menu {
-          visibility: visible;
-        }
+    @media screen and (max-width:786px) {
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .mobile_header{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 100%;
+    background-color: var(--toggler_background_color);
+    height: 37px;
+  }
+  .mobile_header .toggler{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    opacity: 0;
+  }
+  /* toggle bar setup */
+  .mobile_header .nav_toggle_bars{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 25px;
+    height: 25px;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .mobile_header .nav_toggle_bars > div {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background-color: var(--toggler_bars_color);
+    height: 3px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: none;
+    transition: all 0.5s ease;
+  }
+  .mobile_header .nav_toggle_bars > div::after,
+  .mobile_header .nav_toggle_bars > div::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: -8px;
+    width: 100%;
+    height: 3px;
+    background-color: inherit;
+  }
+  .mobile_header .nav_toggle_bars > div::after{
+    top: 8px;
+  }
+  /* toggle bar animation */
+  .mobile_header .toggler:checked + .nav_toggle_bars > div {
+    transform: rotate(135deg);
+    background-color: var(--toggler_bars_color_on_menu);
+  }
+  .mobile_header .toggler:checked + .nav_toggle_bars > div::after,
+  .mobile_header .toggler:checked + .nav_toggle_bars > div::before{
+    top: 0px;
+    transform: rotate(90deg);
+  }
+  .mobile_header .toggler:checked:hover + .nav_toggle_bars > div {
+    transform: rotate(360deg);
+  }
+  /* toggle functionality */
+  .mobile_header .toggler:checked ~ .mobile_menu {
+    visibility: visible;
+  }
+  .mobile_header .toggler:checked ~ .mobile_menu > div {
+    transform: scale(1);
+  }
+  .mobile_header .toggler:checked ~ .mobile_menu > div > div {
+    opacity: 1;
+  }
+  /* toggle menu setup */
+  .mobile_header .mobile_menu {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+  }
+  .mobile_header .mobile_menu > div{
+    background-color: var(--toggle_menu_background_color);
+    width: 175vw;
+    height: 175vw;
+    display: flex;
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+  }
+  .mobile_header .mobile_menu > div > div {
+    text-align: center;
+    max-width: 90vw;
+    max-height: 100vw;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .mobile_header .mobile_menu div > div > ul > li {
+    list-style: none;
+    color: var(--toggle_menu_color);
+    font-size: var(--toggle_menu_font_size);
+    padding: var(--toggle_menu_padding);
+  }
+  .mobile_header .mobile_menu div > div > ul > li > a {
+    color: inherit;
+    text-decoration: none;
+    font-family: var(--toggle_menu_font_family);
+    font-weight: var(--toggle_menu_font_weight);
+  }
+  .mobile_main_logo_text{
+    text-align: center;
+    line-height: var(--logo_line_height_mobile);
+    font-family: var(--logo_font_family);
+    font-size: var(--logo_font_size_mobile);
+    color: var(--logo_color);
+  }
+  .search_menu{
+    position: fixed;
+    top: 6px;
+    right: 10px;
+    font-size: var(--search_menu_font_size);
+    color: var(--search_menu_color);
+  }
+  .search_menu .search_menu_toggler{
+    position: fixed;
+    top: 6px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    opacity: 0;
+  }
+  .search_menu .search_view{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+    visibility: hidden;
+  }
+  .search_menu .search_menu_toggler:checked ~ .search_view{
+    visibility: visible;
+  }
+  .desktop_header{
+    display: none;
+  }
+  .main_showcase{
+    position: relative;
+    top: 37px;
+    left: 0px;
+    height: 35vw;
+  }
+  .bismillah{
+    font-size: 12vw;
+  }
+  .content{
+    position: relative;
+    top: 37px;
+    left: 0px;
+    /* grid-auto-flow: column; */
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    grid-template-areas: "left" "right";
+  }
+  .content_left_R_1{
+    padding: 2%;
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    column-gap: 5%;
+  }
+  .middle_header{
+    display: none;
+  }
+}
+@media screen and (max-width:606px) {
+  .content_left_R_1{
+    padding: 5%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 100%;
+    grid-template-areas: "Time_Table_1" "Time_Table_2" "Time_Table_3";
+    grid-row-gap: 5%;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+  background: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+.main_showcase{
+  width: 100%;
+  height: 25vw;
+  background: var(--main_showcase_background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bismillah{
+  font-size: var(--bismillah_font_size);
+  background: var(--bismillah_color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.contanier{
+  width: 100%;
+  background-color: var(--main_header_background_color);
+}
+.content{
+  margin: 0px auto;
+  max-width: 1250px;
+  background-color: yellow;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-areas: "left right";
+}
+.content_left{
+  grid-area: "left"
+}
+.content_left_R_1{
+  padding: 2%;
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  column-gap: 5%;
+}
+.content_left_R_1_A,
+.content_left_R_1_B,
+.content_left_R_1_C {
+  width: 100%;
+}
+.content_left_R_1_A{
+  grid-area: "Time_Table_1"
+}
+.content_left_R_1_B{
+  grid-area: "Time_Table_2"
+}
+.content_left_R_1_C{
+  grid-area: "Time_Table_3"
+}
+.content_left_R_1_A_setup_1,
+.content_left_R_1_B_setup_1,
+.content_left_R_1_C_setup_1 {
+  text-align: center;
+  font-size: 1.25rem;
+  border: none;
+  border-radius: 1.75rem 1.75rem 0 0;
+  color: white;
+  overflow: hidden;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  box-sizing: border-box;
+}
+.content_left_R_1_A_setup_1{
+  background: var(--main_page_timing_table_A_head_bg_color);
+}
+.content_left_R_1_B_setup_1{
+  background: var(--main_page_timing_table_B_head_bg_color);
+}
+.content_left_R_1_C_setup_1{
+  background: var(--main_page_timing_table_C_head_bg_color);
+}
+.content_left_R_1_A_setup_2,
+.content_left_R_1_B_setup_2,
+.content_left_R_1_C_setup_2 {
+  text-align: left;
+  width: inherit;
+  /* box-sizing: border-box; */
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  border-collapse: collapse;
+  color: #343534;
+}
+.content_left_R_1_A_setup_2_A > th,
+.content_left_R_1_B_setup_2_A > th,
+.content_left_R_1_C_setup_2_A > th {
+  padding: 0.25rem 0.75rem;
+}
+.content_left_R_1_A_setup_2_A > th{
+  background: var(--main_page_timing_table_A_left_bg_color);
+  border: 1px solid var(--main_page_timing_table_A_head_bg_color);
+}
+.content_left_R_1_B_setup_2_A > th{
+  background: var(--main_page_timing_table_B_left_bg_color);
+  border: 1px solid var(--main_page_timing_table_B_head_bg_color);
+}
+.content_left_R_1_C_setup_2_A > th{
+  background: var(--main_page_timing_table_C_left_bg_color);
+  border: 1px solid var(--main_page_timing_table_C_head_bg_color);
+}
+.content_left_R_1_A_setup_2_A > td,
+.content_left_R_1_B_setup_2_A > td,
+.content_left_R_1_C_setup_2_A > td {
+  text-align: center;
+  padding: 0.25rem;
+}
+.content_left_R_1_A_setup_2_A > td {
+  background: var(--main_page_timing_table_A_right_bg_color);
+  border: 1px solid var(--main_page_timing_table_A_head_bg_color);
+}
+.content_left_R_1_B_setup_2_A > td {
+  background: var(--main_page_timing_table_B_right_bg_color);
+  border: 1px solid var(--main_page_timing_table_B_head_bg_color);
+}
+.content_left_R_1_C_setup_2_A > td {
+  background: var(--main_page_timing_table_C_right_bg_color);
+  border: 1px solid var(--main_page_timing_table_C_head_bg_color);
+}
+.content_left_R_1_A_setup_3,
+.content_left_R_1_B_setup_3,
+.content_left_R_1_C_setup_3 {
+  width: 100%;
+  height: 0.5rem;
+  background: var(--main_page_timing_table_A_head_bg_color);
+}
+.content_Right{
+  background: lightgreen;
+  grid-area: "right";
+  padding: 2.5%;
+}
+.content_Right_R_1{
+  background-color: lightblue;
+  padding: 5%;
+}
+.middle_header{
+  background: var(--middle_header_background_color);
+  height: 40px;
+  width: 100%;
+  box-shadow: 0px -2px 6px 4px var(--main_header_shadow_color);
+  text-align: center;
+}
+.middle_header > p{
+  position: relative;
+  top: 11px;
+  color: #343534;
+}
+.main_footer{
+  bottom: 0px;
+  background-color: red;
+  color: white;
+  height: 50px;
+  width: 100%;
+  grid-area: "footer";
+}
 
-        .mob_menu_wrapper .mob_menu_toggler:checked ~ .mob_menu > div {
-          transform: scale(1);
-          transition: all var(--mob_menu_transition_duration) ease;
-        }
 
-        .mob_menu_wrapper .mob_menu_toggler:checked ~ .mob_menu > div > div {
-          opacity: 1;
-          transition:  opacity var(--mob_menu_transition_duration) ease;
-        }
-        .mob_menu_wrapper .mob_menu {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .mob_menu_wrapper .mob_menu > div{
-          background: var(--mob_menu_background_color);
-          border-radius: 50%;
-          width: 200vw;
-          height: 200vw;
-          display: flex;
-          flex: none;
-          align-items: center;
-          justify-content: center;
-          transform: scale(0);
-        }
-        .mob_menu_wrapper .mob_menu div > div {
-          text-align: center;
-          max-width: 90vw;
-          max-height: 100vh;
-          opacity: 0;
-        }
-        .mob_menu_wrapper .mob_menu > div > div > ul > li {
-          list-style: none;
-          color: var(--mob_menu_color);
-          font-size: var(--mob_menu_font_size);
-          padding: var(--mob_menu_padding);
-        }
-        .mob_menu_wrapper .mob_menu > div > div > ul > li > a {
-          color: inherit;
-          text-decoration: none;
-          font-family: var(--mob_menu_font_family);
-          font-weight: var(--mob_menu_font_weight);
-          transition: color var(--mob_menu_transition_duration) ease;
-        }
-      }
-      @media screen and (min-width:787px) {
-        .mob_menu_wrapper{
-          display: none;
-        }
-      }
 
+
+
+@media screen and (max-width:999px) {
+  .content_left_R_1{
+    padding: 2%;
+    display: grid;
+    grid-template-columns: repeat(3, 32%);
+    column-gap: 2%;
+  }
+}
+
+
+
+
+
+
+@media screen and (min-width:787px) {
+  .nav_toggle_btn{
+    display: none;
+  }
+  .top_header{
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  .main_header{
+    width: 100%;
+    height: var(--main_header_height);
+    background-color: var(--main_header_background_color);
+    box-shadow: 0px 2px 6px 4px var(--main_header_shadow_color);
+  }
+  .main_header_logo{
+    display: inline-block;
+    padding-left: 2.5%;
+  }
+  .main_header_logo_text{
+    font-family: var(--logo_font_family);
+    font-size: var(--logo_font_size);
+    color: var(--logo_color);
+    line-height: 48px;
+    cursor: pointer;
+  }
+  .navigation, .navigation_nav{
+    display: inline-block;
+    position: fixed;
+    top: 16px;
+    right: 2.5%;
+  }
+  .navigation_items{}
+  .navigation_item{
+    display: inline-block;
+  }
+  .navigation_item_link{
+    text-decoration: none;
+    padding: 4px 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .navigation_item:nth-child(1){
+    color: var(--navigation_item_01);
+  }
+  .navigation_item:nth-child(2){
+    color: var(--navigation_item_02);
+  }
+  .navigation_item:nth-child(3){
+    color: var(--navigation_item_03);
+  }
+  .navigation_item:nth-child(4){
+    color: var(--navigation_item_04);
+  }
+  .navigation_item:nth-child(5){
+    color: var(--navigation_item_05);
+  }
+  .mobile_header{
+    display: none;
+  }
+}
+:root {
+  /* variables for css/style.css */
+  --main_header_height: 48px;
+  --main_header_background_color: rgba(255,255,255 ,1);
+  --main_header_shadow_color: rgba(33,33,33 ,0.25);
+  /* logo variables */
+  --logo_font_family: 'Roboto', sans-serif;
+  --logo_font_size: 32px;
+  --logo_font_size_mobile: 26px;
+  --logo_line_height: 48px;
+  --logo_line_height_mobile: 37px;
+  --logo_color: rgba(0,200,83 ,1);
+  /* different colors for navigation items */
+  --navigation_item_01: rgba(0,121,107 ,1);
+  --navigation_item_02: rgba(197,17,98 ,1);
+  --navigation_item_03: rgba(221,44,0 ,1);
+  --navigation_item_04: rgba(255,111,0 ,1);
+  --navigation_item_05: rgba(98,0,234 ,1);
+  /* variables for mobile toggler */
+  --toggler_background_color: rgba(255,255,255 ,1);
+  --toggler_bars_color: rgba(0,200,83 ,1);
+  --toggler_bars_color_on_menu: rgba(0,200,83 ,1);
+  /* variables for toggle menu */
+  --toggle_menu_color: rgba(0, 0, 0, 0.75);
+  --toggle_menu_font_family: 'open sans', sans-serif;
+  --toggle_menu_font_size: 22px;
+  --toggle_menu_background_color: rgba(255, 255, 255, 0.975);
+  --toggle_menu_padding: 8px;
+  --toggle_menu_font_weight: bold;
+  /* variables for search menu */
+  --search_menu_font_size: 20px;
+  --search_menu_color: rgba(0,200,83 ,1);
+  /* variables for main showcase */
+  --main_showcase_background: linear-gradient(90deg, rgba(131,58,180,0.125) 0%, rgba(253,29,29,0.125) 50%, rgba(252,176,69,0.125) 100%);
+  --bismillah_color: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  --bismillah_font_size: 8vw;
+  /* variables for middle header */
+  --middle_header_height: 40px;
+  --middle_header_background_color: rgba(100,1750,100 ,0.5);
+  --middle_header_color: rgba(0, 0, 0, 0.75);
+  --middle_header_font_size: 18px;
+  --middle_header_shadow_color: rgba(33,33,33 ,0.25);
+  /* variables for main page timing table */
+  --main_page_timing_table_A_head_bg_color: rgba(0,121,107 ,0.75);
+  --main_page_timing_table_A_left_bg_color: rgba(0,121,107 ,0.5);
+  --main_page_timing_table_A_right_bg_color: rgba(0,121,107 ,0.25);
+  --main_page_timing_table_B_head_bg_color: rgba(197,17,98 ,0.75);
+  --main_page_timing_table_B_left_bg_color: rgba(197,17,98 ,0.5);
+  --main_page_timing_table_B_right_bg_color: rgba(197,17,98 ,0.25);
+  --main_page_timing_table_C_head_bg_color: rgba(221,44,0 ,0.75);
+  --main_page_timing_table_C_left_bg_color: rgba(221,44,0 ,0.5);
+  --main_page_timing_table_C_right_bg_color: rgba(221,44,0 ,0.25);
+  /* variables for footer */
+  --main_footer_background_color: rgba(200,200,200,1);
+  --main_footer_color: rgba(10,10,10 ,1);
+  /* variables for css/mobile/style.css */
+  --mob_menu_toggler_background_color: red;
+  --mob_menu_toggler_bars_color: green;
+  --mob_menu_background_color: black;
+  --mob_menu_color: blue;
+  --mob_menu_transition_duration: 0.5s;
+  --mob_menu_font_size: 1.5rem;
+  --mob_menu_padding: 1rem;
+  --mob_menu_font_family: sans-serif;
+  --mob_menu_font_weight: normal;
+}
+
+      
     </style>
   </head>
   <body>
-    <header>
-      <div class="mob_menu_wrapper">
-        <input type="checkbox" class="mob_menu_toggler">
-        <div class="mob_menu_toggler_bars">
+    <header class="top_header">
+      <div class="mobile_header">
+        <div class="mobile_main_logo">
+          <h1 class="mobile_main_logo_text">The Salat</h1>
+        </div>
+        <input type="checkbox" class="toggler">
+        <div class="nav_toggle_bars">
           <div></div>
         </div>
-        <div class="mob_menu">
+        <div class="mobile_menu">
           <div>
             <div>
               <ul>
-                <li>
-                  <a href="#">Prayer Timings</a>
-                </li>
-                <li>
-                  <a href="#">Daily Dua&apos;s</a>
-                </li>
-                <li>
-                  <a href="#">Al Quran</a>
-                </li>
-                <li>
-                  <a href="#">Hadith</a>
-                </li>
+                <li><a href="">Prayer Timings</a></li>
+                <li><a href="">Daily Dua&apos;s</a></li>
+                <li><a href="">Ramadan 2019</a></li>
+                <li><a href="">Al Quran</a></li>
+                <li><a href="">Hadith</a></li>
               </ul>
             </div>
           </div>
         </div>
+        <div class="search_menu">
+          <input type="checkbox" class="search_menu_toggler">
+          <span class="search_menu_icon"><i class="fa fa-search"></i></span>
+          <div class="search_view">
+            <input type="search" placeholder="Search">
+          </div>
+        </div>
+      </div>
+      <div class="desktop_header">
+        <div class="main_header">
+          <div class="main_header_logo">
+            <h1 class="main_header_logo_text">The Salat</h1>
+          </div>
+          <div class="navigation">
+            <nav class="navigation_nav">
+              <ul class="navigation_items">
+                <li class="navigation_item">
+                  <a href="" class="navigation_item_link">Prayer Timings</a>
+                </li>
+                <li class="navigation_item">
+                  <a href="" class="navigation_item_link">Daily Dua&apos;s</a>
+                </li>
+                <li class="navigation_item">
+                  <a href="" class="navigation_item_link">Ramadan 2019</a>
+                </li>
+                <li class="navigation_item">
+                  <a href="" class="navigation_item_link">Al Quran</a>
+                </li>
+                <li class="navigation_item">
+                  <a href="" class="navigation_item_link">Hadith</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
     </header>
+    <div class="main_showcase">
+      <h1 class="bismillah">&#65021;</h1>
+    </div>
+    <div class="middle_header">
+      <p>Suggest Some Ideas For This Section</p>
+    </div>
+    <div class="contanier">
+      <div class="content">
+        <div class="content_left">
+          <div class="content_left_R_1">
+            <div class="content_left_R_1_A">
+              <h3 class="content_left_R_1_A_setup_1">Lahore</h3>
+              <table class="content_left_R_1_A_setup_2">
+                <tr class="content_left_R_1_A_setup_2_A">
+                  <th scope="row">Fajar</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_A_setup_2_A">
+                  <th scope="row">Zuhar</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_A_setup_2_A">
+                  <th scope="row">Ashar</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_A_setup_2_A">
+                  <th scope="row">Maghrib</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_A_setup_2_A">
+                  <th scope="row">Isha</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_A_setup_2_A">
+                  <th scope="row">Sunrise</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_A_setup_2_A">
+                  <th scope="row">Sunset</th>
+                  <td>00:00 AM</td>
+                </tr>
+              </table>
+            </div>
+            <div class="content_left_R_1_B">
+              <h3 class="content_left_R_1_B_setup_1">Karachi</h3>
+              <table class="content_left_R_1_B_setup_2">
+                <tr class="content_left_R_1_B_setup_2_A">
+                  <th scope="row">Fajar</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_B_setup_2_A">
+                  <th scope="row">Zuhar</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_B_setup_2_A">
+                  <th scope="row">Ashar</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_B_setup_2_A">
+                  <th scope="row">Maghrib</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_B_setup_2_A">
+                  <th scope="row">Isha</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_B_setup_2_A">
+                  <th scope="row">Sunrise</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_B_setup_2_A">
+                  <th scope="row">Sunset</th>
+                  <td>00:00 AM</td>
+                </tr>
+              </table>
+            </div>
+            <div class="content_left_R_1_C">
+              <h3 class="content_left_R_1_C_setup_1">Islamabad</h3>
+              <table class="content_left_R_1_C_setup_2">
+                <tr class="content_left_R_1_C_setup_2_A">
+                  <th scope="row">Fajar</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_C_setup_2_A">
+                  <th scope="row">Zuhar</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_C_setup_2_A">
+                  <th scope="row">Ashar</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_C_setup_2_A">
+                  <th scope="row">Maghrib</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_C_setup_2_A">
+                  <th scope="row">Isha</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_C_setup_2_A">
+                  <th scope="row">Sunrise</th>
+                  <td>00:00 AM</td>
+                </tr>
+                <tr class="content_left_R_1_C_setup_2_A">
+                  <th scope="row">Sunset</th>
+                  <td>00:00 AM</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="content_Right">
+          <div class="content_Right_R_1">
+            <p>Suggest Some Ideas For This Section</p>
+          </div>
+        </div>
+      </div>
+      <div class="main_footer">
+        <p>This is the footer section</p>
+      </div>
+    </div>
   </body>
 </html>
